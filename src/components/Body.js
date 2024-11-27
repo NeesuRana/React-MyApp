@@ -1,3 +1,6 @@
 const Body= () =>{
-    return <div> Body </div>;
+    return (
+            <p>Konichiwa!</p>
+    );
 }
+export default Body;
