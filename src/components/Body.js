@@ -59,15 +59,18 @@ const Body = () => {
         Search
       </div>
       <div className='flex flex-wrap justify-center gap-4 product-items'>
-        <ProductCard productItem={ProductItems[0]}/>
+        {/* <ProductCard productItem={ProductItems[0]}/>
         <ProductCard productItem={ProductItems[1]}/>
-        <ProductCard productItem={ProductItems[2]}/>
-        {/* <ProductCard/>
+        <ProductCard productItem={ProductItems[2]}/> */}
 
-        <ProductCard/>
-        <ProductCard/>
+          {
+            // ProductItems.map((product)=>(
+            //   <ProductCard productItem={product}/>
+            // ))
 
-        <ProductCard/> */}
+            ProductItems.map((product)=> <ProductCard productItem={product}/>)
+          }
+
         <Card cardItem={CardItems[0]}
         />
         {/* <Card

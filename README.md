@@ -6,3 +6,7 @@ Git push –u origin main
 
 # props/properties
 -we can pass dynamic data to React components using props.
+
+
+# props destruct
+-we can shorten the function by de-structing 
