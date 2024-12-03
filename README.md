@@ -10,3 +10,7 @@ Git push –u origin main
 
 # props destruct
 -we can shorten the function by de-structing 
+
+# React Basics
+# React Hooks
+-> 
