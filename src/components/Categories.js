@@ -15,6 +15,5 @@ const Categories = () => {
     </section>
   )
 }
-
 export default Categories;
 
