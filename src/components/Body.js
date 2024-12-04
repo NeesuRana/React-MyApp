@@ -1,13 +1,17 @@
 import React, {useState} from 'react';
 import ProductCard from './ProductCard';
-import { ProductItems } from './utils/mockData';
+import { ProductItems } from '../utils/mockData';
+import Categories from './Categories';
 // import Card from './Card';
 
 const Body = () => {
- let Items=ProductItems;
+const [filteredItems,setfilteredItems] = useState(ProductItems);
+
  function handleTopRatedProducts(){
-  Items = ProductItems.filter((product) => product.rating.rate > 4);
-  console.log(Items);
+  let items=[];
+  items= (filteredItems.filter((product) => product.rating.rate > 4));
+  setfilteredItems(items)
+  console.log(items);
  }
   return (
     <section className='flex flex-col gap-4 px-2 py-2 '>
@@ -24,9 +28,14 @@ const Body = () => {
          onClick={handleTopRatedProducts}>
         Top Rated Products
         </button>
+        <Categories />
+
       <div className='flex flex-wrap justify-center gap-4 product-items'>
+        <h2 className='w-full text-xl font-semibold text-gray-800 text-center mb-4'>
+          Total Items:{filteredItems.length}
+        </h2>
           {
-            Items.map((product)=>(
+            filteredItems.map((product)=>(
               <ProductCard productItem={product} key={product.id}/>
             ))
             // ProductItems.map((product)=> <ProductCard productItem={product} />)

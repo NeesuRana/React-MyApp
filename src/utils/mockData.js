@@ -240,3 +240,9 @@ export const ProductItems=[{
     // }
 ]
 
+export const CategoryItems=[
+  "electronics",
+  "jewelery",
+  "men's clothing",
+  "women's clothing"
+  ]
