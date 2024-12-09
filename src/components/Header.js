@@ -1,6 +1,9 @@
+import { useEffect, useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 
 const Header = () => {
+  const [btnName,setBtnName]=useState(false);
+  
             return (
               <header className='flex items-center justify-between px-3 text-2xl'>
                 <div>
@@ -22,6 +25,12 @@ const Header = () => {
                   </li>
                 </div>
                 <div>Cart</div>
+                <button className="border-box hover:box-content border-2 border-slate-700 px-3 py-3"
+                onClick={()=>{
+                  setBtnName(!btnName);
+                }}>
+                 {btnName ? 'Logout' : 'Login'}
+                </button>
               </header>
             );
           };

@@ -1,19 +1,43 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import ProductCard from './ProductCard';
 import { ProductItems } from '../utils/mockData';
 import Categories from './Categories';
+import ShimmerCard from './ShimmerCard'
 // import Card from './Card';
 
 const Body = () => {
-const [filteredItems,setfilteredItems] = useState(ProductItems);
+const [filteredItems,setfilteredItems] = useState([]);
+useEffect(()=>{
+  fetchApiProduct();
+},[]);
+
+async function fetchApiProduct(){
+  const data= await fetch ('https://fakestoreapi.com/products');
+  const productsData= await data.json();
+  setfilteredItems(productsData);
+}
+
 function handleRatingFilter(minRate,maxRate){
   setfilteredItems(
-    ProductItems.filter((product)=>
+    filteredItems.filter((product)=>
       product.rating.rate>=minRate && product.rating.rate<maxRate));
 }
 
 function AllProducts(){
   setfilteredItems(ProductItems);
+}
+
+if(filteredItems.length===0){
+  return (
+    <div className='flex flex-wrap justify-center gap-4 p-4'>
+      {Array(8)
+      .fill()
+      .map((_, index)=>(
+        <ShimmerCard key={index} />
+      ))
+      }
+    </div>
+  );
 }
 
   return (
