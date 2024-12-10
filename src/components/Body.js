@@ -7,6 +7,9 @@ import ShimmerCard from './ShimmerCard'
 
 const Body = () => {
 const [filteredItems,setfilteredItems] = useState([]);
+const [allProducts,setAllProducts] = useState([]);
+const [searchText,setSearchText]=useState('');
+
 useEffect(()=>{
   fetchApiProduct();
 },[]);
@@ -15,16 +18,25 @@ async function fetchApiProduct(){
   const data= await fetch ('https://fakestoreapi.com/products');
   const productsData= await data.json();
   setfilteredItems(productsData);
+  setAllProducts(productsData);
 }
 
 function handleRatingFilter(minRate,maxRate){
   setfilteredItems(
-    filteredItems.filter((product)=>
+   allProducts.filter((product)=>
       product.rating.rate>=minRate && product.rating.rate<maxRate));
 }
 
-function AllProducts(){
-  setfilteredItems(ProductItems);
+function fetchAllProducts(){
+  setfilteredItems(allProducts);
+}
+
+function handleSearchFilter()
+{
+  const searchedProducts=allProducts.filter((product)=>
+    product.title.toLowerCase().includes(searchText.toLowerCase())
+  );
+  setfilteredItems(searchedProducts);
 }
 
 if(filteredItems.length===0){
@@ -46,25 +58,20 @@ if(filteredItems.length===0){
         <input
           type='text'
           className='w-80 px-4 py-2 pr-10 text-sm text-gray-700 bg-white border border-gray-800 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400'
-          placeholder='Search...'
+          placeholder='Search the products...'
+          value={searchText}
+          onChange={(e)=>
+            setSearchText(e.target.value)
+          }
         />
-        Search
+        <button onClick={handleSearchFilter}>Search</button>
       </div>
       <div className='flex flex-wrap gap-2'>
         <button
           className='px-4 py-2 font semibold text-white transition-colors duration-200 bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg'
-          onClick={AllProducts}
+          onClick={fetchAllProducts}
         >
           All Products
-        </button>
-
-        <button
-          className='px-4 py-2 font semibold text-white transition-colors duration-200 bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg'
-          onClick={()=>{
-            handleRatingFilter(0,1);
-          }}
-          >
-          Rating 0-1 ⭐
         </button>
 
         <button
