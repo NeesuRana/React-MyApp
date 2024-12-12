@@ -2,7 +2,8 @@ import React, {useState,useEffect} from 'react';
 import ProductCard from './ProductCard';
 import { ProductItems } from '../utils/mockData';
 import Categories from './Categories';
-import ShimmerCard from './ShimmerCard'
+import ShimmerCard from './ShimmerCard';
+import { Link } from 'react-router-dom';
 // import Card from './Card';
 
 const Body = () => {
@@ -125,7 +126,9 @@ if(filteredItems.length===0){
         </h2>
           {
             filteredItems.map((product)=>(
+              <Link to={'/product/' + product.id}>
               <ProductCard productItem={product} key={product.id}/>
+              </Link>
             ))
             // ProductItems.map((product)=> <ProductCard productItem={product} />)
           }
